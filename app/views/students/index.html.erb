@@ -1,6 +1,6 @@
-<h1 class="text-lg font-bold">Students List</h1>
+<h1 class="text-3xl font-bold">Students List</h1>
 
-  <div class="grid grid-cols-8 font-bold capitalize py-2 gap-8"> 
+  <div class="grid grid-cols-8 font-medium text-lg capitalize py-2 gap-8"> 
     <p>first name</p>
     <p>last name</p>   
     <p>email</p>   
@@ -10,7 +10,7 @@
   </div>
 
 <% @students.each do |student| %>
-  <div class="grid grid-cols-8 gap-8 py-3">
+  <div class="grid grid-cols-8 gap-8 py-3 text-md">
     <p><%= student.first_name %></p>
     <p><%= student.last_name %></p>
     <p><%= student.email %></p>
@@ -22,10 +22,11 @@
       <%= link_to "Edit", edit_student_path(student) %>
       <%= button_to "Delete", student, method: :delete, data: {
         turbo_confirm: "Are you sure?"
-      }%>
+      }, class: "cursor-pointer"%>
     </div>
   </div>
 <% end %>
 <div>
   <%= link_to "home", root_path, class: "py-1 px-2 capitalize text-white bg-blue-500 text-lg text-center mt-2 rounded-md " %>
+  <%= link_to "New", new_student_path, class: "py-1 px-2 capitalize text-white bg-blue-500 text-lg text-center mt-2 rounded-md " %>
 </div>
