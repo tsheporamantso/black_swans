@@ -21,6 +21,20 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
   end
 
+  def edit
+    @student = Student.find(params[:id])
+  end
+
+  def update
+    @student = Student.find(params[:id])
+
+    if @student.update(student_params)
+      redirect_to students_path, notice: "Student updated successfully."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
   def student_params
     params.require(:student).permit(:first_name, :last_name, :email, :date_of_birth, :permanent_address)
