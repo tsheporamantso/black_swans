@@ -1,6 +1,13 @@
 <h1 class="text-lg font-bold">New Student</h1>
 
 <%= form_with model: @student do |form| %>
+
+<% if @student.errors.any? %>
+  <% @student.errors.full_messages.each do |message| %>
+    <p class="text-red-500"><%= message %></p>
+  <% end %>
+<% end %>
+
 <div class="flex flex-col gap-3">
     <div>
       <%= form.label :first_name %> 
