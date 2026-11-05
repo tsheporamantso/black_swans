@@ -16,9 +16,13 @@
     <p><%= student.email %></p>
     <p><%= student.date_of_birth %></p>
     <p><%= student.permanent_address %></p>
+
     <div class="col-span-3 flex gap-3">
-      <p><%= link_to "View", student %></p>
-      <p><%= link_to "Edit", edit_student_path(student) %></p>
+      <%= link_to "View", student %>
+      <%= link_to "Edit", edit_student_path(student) %>
+      <%= button_to "Delete", student, method: :delete, data: {
+        turbo_confirm: "Are you sure?"
+      }%>
     </div>
   </div>
 <% end %>
