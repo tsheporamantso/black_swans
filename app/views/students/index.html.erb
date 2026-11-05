@@ -1,6 +1,6 @@
 <h1 class="text-lg font-bold">Students List</h1>
 
-  <div class="grid grid-cols-8 font-bold capitalize py-2 "> 
+  <div class="grid grid-cols-8 font-bold capitalize py-2 gap-8"> 
     <p>first name</p>
     <p>last name</p>   
     <p>email</p>   
@@ -10,7 +10,7 @@
   </div>
 
 <% @students.each do |student| %>
-  <div class="grid grid-cols-8 py-1">
+  <div class="grid grid-cols-8 gap-8 py-3">
     <p><%= student.first_name %></p>
     <p><%= student.last_name %></p>
     <p><%= student.email %></p>
@@ -26,5 +26,6 @@
     </div>
   </div>
 <% end %>
-
-<%= link_to "home", root_path, class: "py-1 capitalize text-white bg-blue-500 text-lg text-center mt-2 rounded-md " %>
+<div>
+  <%= link_to "home", root_path, class: "py-1 px-2 capitalize text-white bg-blue-500 text-lg text-center mt-2 rounded-md " %>
+</div>

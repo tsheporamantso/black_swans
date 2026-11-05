@@ -34,14 +34,15 @@ class StudentsController < ApplicationController
 
   def destroy
     @student.destroy
-
     redirect_to students_path
   end
 
   private
+  
   def set_student
     @student = Student.find(params[:id])
   end
+
   def student_params
     params.require(:student).permit(:first_name, :last_name, :email, :date_of_birth, :permanent_address)
   end
