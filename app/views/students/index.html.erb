@@ -1,9 +1,21 @@
-<h1 class="text-lg font-bold">Students</h1>
+<h1 class="text-lg font-bold">Students List</h1>
+
+  <div class="grid grid-cols-5 font-bold capitalize py-2 "> 
+    <p>first name</p>
+    <p>last name</p>   
+    <p>email</p>   
+    <p>date of birth</p>   
+    <p>address</p>   
+  </div>
+
 <% @students.each do |student| %>
-  <div>
-    <h2> First Name: <%= student.first_name %> </h2>
-    <h2> Last Name: <%= student.last_name %> </h2>
-    <p> Email: <%= student.email %></p>
+  <div class="grid grid-cols-5 py-1">
+    <p><%= student.first_name %></p>
+    <p><%= student.last_name %></p>
+    <p><%= student.email %></p>
+    <p><%= student.date_of_birth %></p>
+    <p><%= student.permanent_address %></p>
   </div>
 <% end %>
-<%= link_to "home", root_path, class: "py-1 capitalize text-white bg-blue-500 text-lg text-center w-[150px] rounded-md " %>
+
+<%= link_to "home", root_path, class: "py-1 capitalize text-white bg-blue-500 text-lg text-center mt-2 rounded-md " %>
