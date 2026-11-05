@@ -1,0 +1,11 @@
+<h1 class="text-lg font-bold">Student Details</h1>
+<div class="flex flex-col gap-2">
+  <p><strong>First Name:</strong> <%= @student.first_name %></p>
+  <p><strong>Last Name:</strong> <%= @student.last_name %></p>
+  <p><strong>Email:</strong> <%= @student.email %></p>
+  <p><strong>Date Of Birth:</strong> <%= @student.date_of_birth %></p>
+  <p><strong>Address:</strong> <%= @student.permanent_address %></p>
+</div>
+<div class="mt-3">
+  <%= link_to "Students", students_path, class:"py-1 px-3 rounded-md bg-blue-500 hover-bg-blue-700 text-lg text-white" %>
+</div>

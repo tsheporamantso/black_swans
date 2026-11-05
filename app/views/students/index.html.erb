@@ -1,20 +1,22 @@
 <h1 class="text-lg font-bold">Students List</h1>
 
-  <div class="grid grid-cols-5 font-bold capitalize py-2 "> 
+  <div class="grid grid-cols-6 font-bold capitalize py-2 "> 
     <p>first name</p>
     <p>last name</p>   
     <p>email</p>   
     <p>date of birth</p>   
-    <p>address</p>   
+    <p>address</p> 
+    <p >Actions</p>  
   </div>
 
 <% @students.each do |student| %>
-  <div class="grid grid-cols-5 py-1">
+  <div class="grid grid-cols-6 py-1">
     <p><%= student.first_name %></p>
     <p><%= student.last_name %></p>
     <p><%= student.email %></p>
     <p><%= student.date_of_birth %></p>
     <p><%= student.permanent_address %></p>
+    <p><%= link_to "View", student %></p>
   </div>
 <% end %>
 
