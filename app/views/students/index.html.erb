@@ -1,8 +1,9 @@
 <h1 class="text-lg font-bold">Students</h1>
 <% @students.each do |student| %>
-  <ul>
-    <li>
-      <%= student.first_name %>
-    </li>
-  </ul>
+  <div>
+    <h2> First Name: <%= student.first_name %> </h2>
+    <h2> Last Name: <%= student.last_name %> </h2>
+    <p> Email: <%= student.email %></p>
+  </div>
 <% end %>
+<%= link_to "home", root_path, class: "py-1 capitalize text-white bg-blue-500 text-lg text-center w-[150px] rounded-md " %>
