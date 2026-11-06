@@ -12,8 +12,11 @@
     <%= form.label :email, class: "capitalize font-medium text-lg" %>
     <%= form.email_field :email, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": student.errors[:email].none?, "border-red-400 focus:outline-red-600": student.errors[:email].any?}] %>
 
-    <%= form.label :address, class: "capitalize font-medium text-lg" %>
+    <%= form.label :permanent_address, class: "capitalize font-medium text-lg" %>
     <%= form.text_field :permanent_address, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": student.errors[:permanent_address].none?, "border-red-400 focus:outline-red-600": student.errors[:permanent_address].any?}] %>
+
+    <%= form.label :local_address, class: "capitalize font-medium text-lg" %>
+    <%= form.text_field :local_address, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": student.errors[:local_address].none?, "border-red-400 focus:outline-red-600": student.errors[:local_address].any?}] %>
   
   </div>
   <%= form.submit class: "text-white bg-blue-500 hover:bg-blue-700 py-2 px-2 rounded-md mt-3 text-lg" %>
