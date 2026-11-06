@@ -12,7 +12,8 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     if @student.save
-      redirect_to students_path, notice: "Student created successfully."
+      flash[:notice] = "Student created successfully."
+      redirect_to students_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +27,8 @@ class StudentsController < ApplicationController
 
   def update
     if @student.update(student_params)
-      redirect_to student_path(@student), notice: "Student updated successfully."
+      flash[:notice] = "Student updated successfully."
+      redirect_to student_path(@student)
     else
       render :edit, status: :unprocessable_entity
     end
