@@ -1,3 +1,9 @@
-<h1 class="text-3xl font-bold">Edit Student</h1>
+<h1 class="text-4xl font-bold mb-3.5">Edit Student</h1>
 
 <%= render "form", student: @student %>
+
+<div class="flex gap-5 mt-4">
+<%= link_to "Show this student", @student, class: "w-full sm:w-auto text-center mt-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 font-medium" %>
+
+<%= link_to "Back to students", students_path, class: "w-full sm:w-auto text-center mt-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 font-medium" %>
+</div>
