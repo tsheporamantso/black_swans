@@ -36,6 +36,7 @@ class StudentsController < ApplicationController
 
   def destroy
     @student.destroy
+    flash[:notice] = "Student deleted successfully."
     redirect_to students_path
   end
 
@@ -46,6 +47,6 @@ class StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:student).permit(:first_name, :last_name, :email, :date_of_birth, :permanent_address)
+    params.require(:student).permit(:first_name, :last_name, :email, :permanent_address)
   end
 end

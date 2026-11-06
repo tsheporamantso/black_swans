@@ -4,7 +4,6 @@
     <p>first name</p>
     <p>last name</p>   
     <p>email</p>   
-    <p>date of birth</p>   
     <p>address</p> 
     <p class="col-span-3">Actions</p>  
   </div>
@@ -14,7 +13,6 @@
     <p><%= student.first_name %></p>
     <p><%= student.last_name %></p>
     <p><%= student.email %></p>
-    <p><%= student.date_of_birth %></p>
     <p><%= student.permanent_address %></p>
 
     <div class="col-span-3 flex gap-3">
@@ -26,7 +24,6 @@
     </div>
   </div>
 <% end %>
-<div>
-  <%= link_to "home", root_path, class: "py-1 px-2 capitalize text-white bg-blue-500 text-lg text-center mt-2 rounded-md " %>
-  <%= link_to "New", new_student_path, class: "py-1 px-2 capitalize text-white bg-blue-500 text-lg text-center mt-2 rounded-md " %>
+<div class="mt-5">
+  <%= link_to "Create New Student", new_student_path, class: "py-1 px-2 capitalize text-white bg-blue-500 text-lg text-center rounded-md " %>
 </div>

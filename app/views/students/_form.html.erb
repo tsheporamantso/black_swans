@@ -4,20 +4,17 @@
 
   <div class="flex flex-col gap-2 justify-center align-center w-2xl "> 
     <%= form.label :first_name, class: "capitalize font-medium text-lg"%> 
-    <%= form.text_field :first_name, class: "border border-gray-400 rounded-md"%>
+    <%= form.text_field :first_name, class: "border border-gray-400 rounded-md p-2"%>
   
     <%= form.label :last_name, class: "capitalize font-medium text-lg" %>
-    <%= form.text_field :last_name, class: "border border-gray-400 rounded-md" %>
+    <%= form.text_field :last_name, class: "border border-gray-400 rounded-md p-2" %>
   
     <%= form.label :email, class: "capitalize font-medium text-lg" %>
-    <%= form.email_field :email, class: "border border-gray-400 rounded-md" %>
+    <%= form.email_field :email, class: "border border-gray-400 rounded-md p-2" %>
 
-    <%= form.label :date_of_birth, class: "capitalize font-medium text-lg" %>
-    <%= form.date_field :date_of_birth, class: "border border-gray-400 rounded-md" %>
-   
     <%= form.label :address, class: "capitalize font-medium text-lg" %>
-    <%= form.text_field :permanent_address, class: "border border-gray-400 rounded-md" %>
+    <%= form.text_field :permanent_address, class: "border border-gray-400 rounded-md p-2" %>
   </div>
   
-  <%= form.submit class: "text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded-md mt-3 text-md" %>
+  <%= form.submit class: "text-white bg-blue-500 hover:bg-blue-700 py-2 px-2 rounded-md mt-3 text-lg" %>
 <% end %>
