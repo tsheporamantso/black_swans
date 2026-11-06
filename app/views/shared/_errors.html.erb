@@ -1,0 +1,8 @@
+  <% if @student.errors.any? %>
+    <h4> The following <%= pluralize(@student.errors.count, "error") %> prevented the <%= @student.class.name.downcase %> from being saved</h4>
+    <ul>
+      <% @student.errors.full_messages.each do |message| %>
+        <li class="text-red-500"><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
