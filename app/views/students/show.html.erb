@@ -3,7 +3,7 @@
 <div class="flex flex-col gap-3 text-lg">
   <p><strong>First Name:</strong> <%= @student.first_name %></p>
   <p><strong>Last Name:</strong> <%= @student.last_name %></p>
-  <p><strong>Email:</strong> <%= @student.email %></p>
+  <p><strong>Email:</strong> <%= @student.email.downcase %></p>
   <p><strong>Permanent Address:</strong> <%= @student.permanent_address %></p>
   <p><strong>Local Address:</strong> <%= @student.local_address %></p>
   <p><strong>Permanent Contact Number:</strong> <%= @student.permanent_contact_number %></p>
