@@ -9,6 +9,7 @@ class Student < ApplicationRecord
 
   before_validation :titleize_first_name
   after_validation :log_errors
+  after_create :display_student_age
 
   private
   def titleize_first_name
@@ -21,4 +22,14 @@ class Student < ApplicationRecord
       Rails.logger.error("Validation failed: #{errors.full_messages.join(', ')}")
     end
   end
+
+  def display_student_age
+    if date_of_birth.present?
+      age = ((Time.zone.now - date_of_birth.to_time) / 1.year.seconds).floor
+      Rails.logger.info("Student age is #{age} years")
+    else
+      Rails.logger.warn("Date of birth not provided, cannot calculate age.")
+    end
+  end
+
 end
