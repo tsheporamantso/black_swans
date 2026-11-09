@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_09_105526) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_09_110002) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -26,6 +26,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_105526) do
     t.index ["course_id"], name: "index_enrollments_on_course_id"
     t.index ["student_id", "course_id"], name: "index_enrollments_on_student_id_and_course_id", unique: true
     t.index ["student_id"], name: "index_enrollments_on_student_id"
+  end
+
+  create_table "faculties", force: :cascade do |t|
+    t.string "faculty_name"
+    t.text "faculty_description"
+    t.integer "faculty_dean_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["faculty_dean_id"], name: "index_faculties_on_faculty_dean_id"
   end
 
   create_table "faculty_deans", force: :cascade do |t|
@@ -67,6 +76,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_105526) do
 
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "students"
+  add_foreign_key "faculties", "faculty_deans"
   add_foreign_key "student_projects", "projects"
   add_foreign_key "student_projects", "students"
 end
