@@ -1,0 +1,2 @@
+class FacultyDean < ApplicationRecord
+end
