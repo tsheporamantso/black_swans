@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_09_110002) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_09_172158) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -72,6 +72,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_110002) do
     t.string "local_address"
     t.string "permanent_contact_number"
     t.string "alternative_contact_number"
+    t.date "date_of_birth"
   end
 
   add_foreign_key "enrollments", "courses"
