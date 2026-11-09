@@ -6,10 +6,16 @@ class Student < ApplicationRecord
   has_many :projects, through: :student_projects
 
   validates :first_name, :last_name, :email, :permanent_address, :local_address, :permanent_contact_number, :alternative_contact_number, presence: :true
+  validates :email , uniqueness: :true
+  validates :first_name, :last_name, length: { minimum: 2, maximum: 50 }, format: {with: /\A[\p{L}\s\-']+\z/, message: "can only contain letters, spaces, hyphens, and apostrophes"}
 
   before_validation :titleize_first_name
   after_validation :log_errors
   after_create :display_student_age
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 
   private
   def titleize_first_name
@@ -31,5 +37,4 @@ class Student < ApplicationRecord
       Rails.logger.warn("Date of birth not provided, cannot calculate age.")
     end
   end
-
 end
