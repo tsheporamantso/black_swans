@@ -18,7 +18,7 @@ class Student < ApplicationRecord
   end
 
   def student_age
-    return nil unless date_of_birth.present?
+    return "Date of Birth not provided" unless date_of_birth.present?
     return ((Time.zone.now - date_of_birth.to_time) / 1.year.seconds).floor
   end
 
