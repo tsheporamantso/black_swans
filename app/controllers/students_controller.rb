@@ -20,6 +20,7 @@ class StudentsController < ApplicationController
   end
 
   def show 
+    @age = @student.student_age
   end
 
   def edit
