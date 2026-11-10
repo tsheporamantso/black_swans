@@ -17,6 +17,11 @@ class Student < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def student_age
+    return nil unless date_of_birth.present?
+    return ((Time.zone.now - date_of_birth.to_time) / 1.year.seconds).floor
+  end
+
   private
   def titleize_first_name
     self.first_name = first_name.titleize if first_name.present?
