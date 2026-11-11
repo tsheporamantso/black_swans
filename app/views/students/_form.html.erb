@@ -1,29 +1,59 @@
+
 <%= form_with model: student do |form| %>
 
   <%= render "shared/errors" %>
 
-  <div class="flex flex-col gap-2 justify-center align-center w-2xl "> 
-    <%= form.label :first_name, class: "capitalize font-medium text-lg"%> 
-    <%= form.text_field :first_name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": student.errors[:first_name].none?, "border-red-400 focus:outline-red-600": student.errors[:first_name].any?}]%>
-  
-    <%= form.label :last_name, class: "capitalize font-medium text-lg" %>
-    <%= form.text_field :last_name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": student.errors[:last_name].none?, "border-red-400 focus:outline-red-600": student.errors[:last_name].any?}] %>
-  
-    <%= form.label :email, class: "capitalize font-medium text-lg" %>
-    <%= form.email_field :email, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": student.errors[:email].none?, "border-red-400 focus:outline-red-600": student.errors[:email].any?}] %>
+  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg border border-gray-200 p-6 sm:p-8">
 
-    <%= form.label :permanent_address, class: "capitalize font-medium text-lg" %>
-    <%= form.text_field :permanent_address, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": student.errors[:permanent_address].none?, "border-red-400 focus:outline-red-600": student.errors[:permanent_address].any?}] %>
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-800">
+        <%= student.persisted? ? "Update Student Details" : "Register New Student" %>
+      </h2>
+      <p class="text-sm text-gray-500 mt-1">
+        Please provide the student's information below.
+      </p>
+    </div>
 
-    <%= form.label :local_address, class: "capitalize font-medium text-lg" %>
-    <%= form.text_field :local_address, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": student.errors[:local_address].none?, "border-red-400 focus:outline-red-600": student.errors[:local_address].any?}] %>
+    <% input_class = "block w-full rounded-lg border px-3 py-2.5 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition" %>
 
-    <%= form.label :permanent_contact_number, class: "capitalize font-medium text-lg" %>
-    <%= form.text_field :permanent_contact_number, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": student.errors[:permanent_contact_number].none?, "border-red-400 focus:outline-red-600": student.errors[:permanent_contact_number].any?}] %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
 
-    <%= form.label :alternative_contact_number, class: "capitalize font-medium text-lg" %>
-    <%= form.text_field :alternative_contact_number, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": student.errors[:alternative_contact_number].none?, "border-red-400 focus:outline-red-600": student.errors[:alternative_contact_number].any?}] %>
-  
+      <% [:first_name, :last_name, :email, :permanent_address, :local_address, :permanent_contact_number, :alternative_contact_number].each do |field| %>
+
+        <div class="flex flex-col gap-2">
+
+          <%= form.label field, class: "text-sm font-semibold text-gray-600 capitalize" %>
+
+          <%= form.text_field field,
+              class: [
+                input_class,
+                {
+                  "border-gray-300": student.errors[field].none?,
+                  "border-red-400 focus:ring-red-500": student.errors[field].any?
+                }
+              ] %>
+
+          <% if student.errors[field].any? %>
+            <p class="text-sm text-red-600">
+              <%= student.errors.full_messages_for(field).first %>
+            </p>
+          <% end %>
+
+        </div>
+
+      <% end %>
+
+    </div>
+
+    <div class="border-t border-gray-200 mt-8 pt-6 flex flex-col sm:flex-row gap-3">
+
+      <%= form.submit class: "rounded-lg px-6 py-2.5 bg-blue-600 text-white hover:bg-blue-700 font-medium transition cursor-pointer" %>
+
+      <%= link_to "Back to Students", students_path,
+          class: "text-center rounded-lg px-6 py-2.5 bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium transition" %>
+
+    </div>
+
   </div>
-  <%= form.submit class: "text-white bg-blue-500 hover:bg-blue-700 py-2 px-2 rounded-md mt-3 text-lg" %>
+
 <% end %>

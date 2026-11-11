@@ -24,10 +24,14 @@
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex flex-col">
+  <body class="min-h-screen flex flex-col">
+    <nav> <%= render "layouts/navbar" %> </nav>
+
+    <main class="container mx-auto mt-28 px-5 flex-grow">
       <%= render "layouts/messages" %>
       <%= yield %>
     </main>
+    
+    <footer> <%= render "layouts/footer" %> </footer>
   </body>
 </html>
