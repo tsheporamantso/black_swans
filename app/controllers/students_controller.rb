@@ -52,7 +52,7 @@ class StudentsController < ApplicationController
     redirect_to students_path
   end
 
-  def active
+  def active_students
     @student = Student.all
   end
 

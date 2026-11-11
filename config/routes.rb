@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
 
     collection do
-      get :active
+      get :active_students
     end
   end
 
