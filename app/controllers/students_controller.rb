@@ -2,7 +2,18 @@ class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
 
   def index
-    @students = Student.all
+    per_page = 2
+
+    @page = [params[:page].to_i, 1].max
+
+    @total_students = Student.count
+    @total_pages = [(@total_students.to_f / per_page).ceil, 1].max
+
+    @page = [@page, @total_pages].min
+
+    offset = (@page - 1) * per_page
+
+    @students = Student.includes(:courses).order(:id).limit(per_page).offset(offset)
   end
 
   def new 

@@ -10,7 +10,13 @@
   <% if @students.any? %>
     <% @students.each do |student| %>
 
+    <% student.courses.each do | course | %>
+     <p> <%= course.name %> </p>
+    <% end %>
+
       <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
+
+      
 
         <div class="w-full grid grid-cols-2 gap-y-2 py-3">
           <p class="font-medium">First name:</p>
@@ -48,7 +54,7 @@
             class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer" %>
 
         </div>
-
+      
       </div>
 
     <% end %>
@@ -56,5 +62,15 @@
   <% else %>
     <p class="text-center my-10">No students found.</p>
   <% end %>
+
+    <% if @page > 1 %>
+      <%= link_to "Previous", students_path(page: @page - 1), class: "px-4 py-2 bg-gray-200 rounded" %>
+    <% end %>
+    <span>
+      Page <%= @page %> of <%= @total_pages %>
+    </span>
+    <% if @page < @total_pages %>
+      <%= link_to "Next", students_path(page: @page + 1), class: "px-4 py-2 bg-gray-200 rounded" %>
+    <% end %>
 
 </div>
