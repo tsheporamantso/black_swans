@@ -18,6 +18,11 @@ Rails.application.routes.draw do
       get :active_students
     end
   end
+  
+  namespace :admin do
+    resources :students
+    resources :courses
+  end
 
   # resources :students, only: [:index, :show, :edit, :new, :create, :update, :destroy]
 
