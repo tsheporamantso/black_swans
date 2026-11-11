@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: %i[ show edit update destroy ]
+  before_action :set_student, only: %i[ show edit update destroy personal_details ]
 
   def index
     per_page = 2
@@ -50,6 +50,13 @@ class StudentsController < ApplicationController
     @student.destroy
     flash[:notice] = "Student deleted successfully."
     redirect_to students_path
+  end
+
+  def active
+    @student = Student.all
+  end
+
+  def personal_details
   end
 
   private
