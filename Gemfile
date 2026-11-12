@@ -68,3 +68,5 @@ end
 gem "tailwindcss-rails", "~> 4.7"
 
 gem "devise", "~> 5.0"
+
+gem 'kaminari'
