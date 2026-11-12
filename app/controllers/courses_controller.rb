@@ -4,7 +4,20 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     # @courses = Course.all
-    @pagy, @courses = pagy(:offset, Course.all, limit: 2)
+    # @pagy, @courses = pagy(:offset, Course.all, limit: 2)
+
+    per_page = 2
+
+    @page = [params[:page].to_i, 1].max
+
+    @total_courses = Course.count
+    @total_pages = [(@total_courses.to_f / per_page).ceil, 1].max
+
+    @page = [@page, @total_pages].min
+
+    offset = (@page - 1) * per_page
+
+    @courses = Course.all.order(:id).limit(per_page).offset(offset)
   end
 
   # GET /courses/1 or /courses/1.json
