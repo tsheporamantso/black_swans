@@ -3,7 +3,8 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all.page(params[:page])
+    # @courses = Course.all
+    @pagy, @courses = pagy(:offset, Course.all, limit: 2)
   end
 
   # GET /courses/1 or /courses/1.json
