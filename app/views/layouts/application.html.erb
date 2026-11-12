@@ -27,11 +27,11 @@
   <body class="min-h-screen flex flex-col">
     <nav> <%= render "layouts/navbar" %> </nav>
 
-    <main class="container mx-auto mt-28 px-5 flex-grow">
+    <main class="container mx-auto mt-24 px-5 flex-grow ">
       <%= render "layouts/messages" %>
       <%= yield %>
     </main>
-    
-    <footer> <%= render "layouts/footer" %> </footer>
+
+    <%= render "layouts/footer" %> 
   </body>
 </html>

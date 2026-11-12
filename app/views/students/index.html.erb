@@ -1,6 +1,11 @@
 
 <div class="max-w-6xl mx-auto">
 
+  <!-- Pagination -->
+  <div class= "mb-10">
+    <%= render "pagination" %>
+  </div>
+
   <!-- Page heading -->
   <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-8">
 
@@ -159,26 +164,8 @@
   </div>
 
   <!-- Pagination -->
-  <% if @total_pages > 1 %>
-
-    <div class="flex justify-center items-center gap-4 mt-8">
-
-      <% if @page > 1 %>
-        <%= link_to "Previous", students_path(page: @page - 1),
-            class: "rounded-lg px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition" %>
-      <% end %>
-
-      <span class="text-sm font-medium text-gray-600">
-        Page <%= @page %> of <%= @total_pages %>
-      </span>
-
-      <% if @page < @total_pages %>
-        <%= link_to "Next", students_path(page: @page + 1),
-            class: "rounded-lg px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition" %>
-      <% end %>
-
-    </div>
-
-  <% end %>
+   <div class= "mt-20">
+    <%= render "pagination" %>
+  </div>
 
 </div>
