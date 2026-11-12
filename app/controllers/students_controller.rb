@@ -4,16 +4,22 @@ class StudentsController < ApplicationController
   def index
     per_page = 2
 
-    @page = [params[:page].to_i, 1].max
+    @q = Student.ransack(params[:q])
 
-    @total_students = Student.count
+    students = @q.result(distinct: true)
+
+    @total_students = students.count
     @total_pages = [(@total_students.to_f / per_page).ceil, 1].max
 
-    @page = [@page, @total_pages].min
+    @page = [[params[:page].to_i, 1].max, @total_pages].min
 
     offset = (@page - 1) * per_page
 
-    @students = Student.includes(:courses).order(:id).limit(per_page).offset(offset)
+    @students = students
+                .includes(:courses)
+                .order(:id)
+                .limit(per_page)
+                .offset(offset)
   end
 
   def new 

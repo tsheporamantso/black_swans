@@ -1,39 +1,45 @@
 <div class="max-w-6xl mx-auto">
+  <%# -- Search -- %>
+  <%= search_form_for @q do |f| %>
+    <div class="flex gap-2 ">
+      <%=
+        f.search_field :first_name_or_last_name_or_email_cont,
+        placeholder: "Search students...",
+        class: "rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition p-2"
+      %>
+
+      <%=
+        f.submit "Search",
+        class: "bg-blue-600 text-white px-4 py-2 rounded-lg"
+      %>
+    </div>
+  <% end %>
 
   <!-- Pagination -->
-  <div class= "mb-10">
+  <div class="mb-10">
     <%= render "pagination" %>
   </div>
 
   <!-- Page heading -->
   <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-8">
-
     <div>
-      <h1 class="text-3xl font-bold text-gray-800">
-          Students
-      </h1>
-      <p class="text-sm text-gray-500 mt-1">
-          Manage and view registered students.
-      </p>
+      <h1 class="text-3xl font-bold text-gray-800">Students</h1>
+      <p class="text-sm text-gray-500 mt-1">Manage and view registered students.</p>
     </div>
 
-    <%= link_to "Create New Student", new_student_path,
-        class: "text-center rounded-lg px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium transition shadow-sm" %>
-
+    <%=
+      link_to "Create New Student", new_student_path,
+      class: "text-center rounded-lg px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium transition shadow-sm"
+    %>
   </div>
 
   <!-- Students list -->
   <div id="students" class="space-y-5">
-
     <% if @students.any? %>
-
       <% @students.each do |student| %>
-
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 hover:shadow-lg transition">
-
           <!-- Student heading -->
           <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6">
-
             <div>
               <h2 class="text-xl font-bold text-gray-800">
                 <%= student.full_name %>
@@ -45,7 +51,6 @@
 
             <!-- Enrolled courses -->
             <div class="flex flex-wrap gap-2">
-
               <% student.courses.each do |course| %>
                 <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full">
                   <%= course.name %>
@@ -53,115 +58,83 @@
               <% end %>
 
               <% if student.courses.empty? %>
-                <span class="text-sm text-gray-400 italic">
-                    No courses enrolled
-                </span>
+                <span class="text-sm text-gray-400 italic"> No courses enrolled </span>
               <% end %>
-
             </div>
-
           </div>
 
           <!-- Student information -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-gray-700">
-
             <div>
-              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  First Name
-              </p>
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">First Name</p>
               <p class="mt-1 font-medium">
                 <%= student.first_name %>
               </p>
             </div>
 
             <div>
-              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Last Name
-              </p>
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Last Name</p>
               <p class="mt-1 font-medium">
                 <%= student.last_name %>
               </p>
             </div>
 
             <div>
-              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Permanent Address
-              </p>
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Permanent Address</p>
               <p class="mt-1">
                 <%= student.permanent_address %>
               </p>
             </div>
 
             <div>
-              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Local Address
-              </p>
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Local Address</p>
               <p class="mt-1">
                 <%= student.local_address %>
               </p>
             </div>
 
             <div>
-              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Permanent Contact Number
-              </p>
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Permanent Contact Number</p>
               <p class="mt-1">
                 <%= student.permanent_contact_number %>
               </p>
             </div>
 
             <div>
-              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Alternative Contact Number
-              </p>
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Alternative Contact Number</p>
               <p class="mt-1">
                 <%= student.alternative_contact_number %>
               </p>
             </div>
-
           </div>
 
           <!-- Action buttons -->
           <div class="border-t border-gray-200 mt-6 pt-5 flex flex-col sm:flex-row gap-3">
+            <%=
+              link_to "View Details", student,
+              class: "text-center rounded-lg px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium transition"
+            %>
 
-            <%= link_to "View Details", student,
-                class: "text-center rounded-lg px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium transition" %>
-
-            <%= link_to "Edit Student", edit_student_path(student),
-                class: "text-center rounded-lg px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition" %>
+            <%=
+              link_to "Edit Student", edit_student_path(student),
+              class: "text-center rounded-lg px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition"
+            %>
 
             <%= button_to "Delete Student", student, method: :delete, data: { turbo_confirm: "Are you sure you want to delete this student?" }, class: "rounded-lg px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-medium cursor-pointer transition" %>
-
-            </div>
-
           </div>
-
-        <% end %>
-
-      <% else %>
-
-        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-10 text-center">
-
-          <h2 class="text-xl font-semibold text-gray-700">
-              No students found
-          </h2>
-
-          <p class="text-gray-500 mt-2">
-              Start by registering your first student.
-          </p>
-
-          <%= link_to "Create New Student", new_student_path,
-              class: "inline-block mt-5 rounded-lg px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium transition" %>
-
         </div>
-
       <% end %>
+    <% else %>
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 p-10 text-center">
+        <h2 class="text-xl font-semibold text-gray-700">No students found</h2>
 
-    </div>
-
-    <!-- Pagination -->
-    <div class= "mt-20">
-      <%= render "pagination" %>
-    </div>
-
+        <p class="text-gray-500 mt-2">Start by registering your first student.</p>
+      </div>
+    <% end %>
   </div>
+
+  <!-- Pagination -->
+  <div class="mt-20">
+    <%= render "pagination" %>
+  </div>
+</div>

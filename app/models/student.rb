@@ -11,6 +11,25 @@ class Student < ApplicationRecord
   after_validation :log_errors
   after_create :display_student_age
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[
+      first_name
+      last_name
+      email
+      permanent_contact_number
+      alternative_contact_number
+    ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[
+      courses
+      enrollments
+      projects
+      student_projects
+    ]
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

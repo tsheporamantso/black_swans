@@ -72,3 +72,5 @@ gem "devise", "~> 5.0"
 gem 'kaminari'
 
 gem "pagy"
+
+gem "ransack"
