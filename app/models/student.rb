@@ -5,6 +5,8 @@ class Student < ApplicationRecord
   has_many :student_projects, dependent: :destroy
   has_many :projects, through: :student_projects
 
+  has_one_attached :profile_image
+
   include Validatable
   
   before_validation :titleize_first_name

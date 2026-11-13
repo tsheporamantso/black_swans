@@ -1,58 +1,128 @@
 <%= form_with model: student do |form| %>
-
   <%= render "shared/errors" %>
 
   <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg border border-gray-200 p-6 sm:p-8">
-
     <div class="mb-8">
       <h2 class="text-2xl font-bold text-gray-800">
         <%= student.persisted? ? "Update Student Details": "Register New Student" %>
       </h2>
-      <p class="text-sm text-gray-500 mt-1">
-          Please provide the student's information below.
-      </p>
+      <p class="text-sm text-gray-500 mt-1">Please provide the student's information below.</p>
     </div>
 
     <% input_class = "block w-full rounded-lg border px-3 py-2.5 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition" %>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
-
       <% [:first_name, :last_name, :email, :permanent_address, :local_address, :permanent_contact_number, :alternative_contact_number].each do |field| %>
-
         <div class="flex flex-col gap-2">
-
           <%= form.label field, class: "text-sm font-semibold text-gray-600 capitalize" %>
 
-          <%= form.text_field field,
-              class: [
-              input_class,
-              {
-              "border-gray-300": student.errors[field].none?,
-              "border-red-400 focus:ring-red-500": student.errors[field].any?
-              }
-              ] %>
+          <%=
+            form.text_field field,
+            class: [
+            input_class,
+            {
+            "border-gray-300": student.errors[field].none?,
+            "border-red-400 focus:ring-red-500": student.errors[field].any?
+            }
+            ]
+          %>
 
           <% if student.errors[field].any? %>
             <p class="text-sm text-red-600">
               <%= student.errors.full_messages_for(field).first %>
             </p>
           <% end %>
-
         </div>
-
       <% end %>
 
+      <%# --- Profile Image Upload --- %>
+      <div class="md:col-span-2" data-controller="profile-image-preview">
+        <div class="border border-gray-200 rounded-xl p-5 bg-gray-50">
+          <div class="mb-5">
+            <h3 class="text-base font-semibold text-gray-800">Profile Photograph</h3>
+            <p class="text-sm text-gray-500 mt-1">Upload a photograph to personalize the student's profile.</p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-6">
+            <%# Image Preview %>
+            <div class="shrink-0">
+              <%=
+                image_tag(
+                  student.profile_image.attached? ? student.profile_image : "",
+                  data: { profile_image_preview_target: "preview" },
+                  class: "w-28 h-28 rounded-xl object-cover border-2 border-white shadow-md #{'hidden' unless student.profile_image.attached?}"
+                )
+              %>
+
+              <div
+                data-profile-image-preview-target="placeholder"
+                class="w-28 h-28 rounded-xl bg-indigo-100 border-2 border-white shadow-md flex flex-col items-center justify-center text-indigo-500 <%= 'hidden' if student.profile_image.attached? %>"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-10 h-10"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a8.25 8.25 0 0 1 15 0"
+                  />
+                </svg>
+
+                <span class="text-xs font-medium mt-1">No Photo</span>
+              </div>
+            </div>
+
+            <%# Upload Control %>
+            <div class="flex-1 w-full">
+              <%=
+                form.label :profile_image,
+                "Choose Profile Image",
+                class: "block text-sm font-semibold text-gray-700 mb-2"
+              %>
+
+              <%=
+                form.file_field :profile_image,
+                accept: "image/png,image/jpeg,image/webp",
+                data: {
+                  profile_image_preview_target: "input",
+                  action: "change->profile-image-preview#preview"
+                },
+                class: "block w-full text-sm text-gray-600
+                file:mr-4 file:py-2.5 file:px-5
+                file:rounded-lg file:border-0
+                file:bg-indigo-600 file:text-white
+                file:font-semibold file:cursor-pointer
+                hover:file:bg-indigo-700
+                border border-gray-300 rounded-lg bg-white"
+              %>
+
+              <p class="text-xs text-gray-500 mt-3">PNG, JPG or WEBP. Choose a clear photograph.</p>
+
+              <p data-profile-image-preview-target="error" class="text-sm text-red-600 mt-2 hidden"></p>
+
+              <% if student.errors[:profile_image].any? %>
+                <p class="text-sm text-red-600 mt-2">
+                  <%= student.errors.full_messages_for(:profile_image).first %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="border-t border-gray-200 mt-8 pt-6 flex flex-col sm:flex-row gap-3">
-
       <%= form.submit class: "rounded-lg px-6 py-2.5 bg-blue-600 text-white hover:bg-blue-700 font-medium transition cursor-pointer" %>
 
-      <%= link_to "Back to Students", students_path,
-          class: "text-center rounded-lg px-6 py-2.5 bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium transition" %>
-
+      <%=
+        link_to "Back to Students", students_path,
+        class: "text-center rounded-lg px-6 py-2.5 bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium transition"
+      %>
     </div>
-
   </div>
-
 <% end %>
