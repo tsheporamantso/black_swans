@@ -1,29 +1,39 @@
-<h2>Sign up</h2>
+<div class="min-h-[70vh] flex items-center justify-center px-4 py-12">
+  <div class="w-full max-w-md bg-white border border-gray-200 rounded-xl shadow-sm p-8">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-gray-900">Welcome</h2>
+      <p class="text-sm text-gray-500 mt-2">Sign up to your Black Swans University account</p>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "admin_users/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "admin_users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <p><%= f.label :email %></p>
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
-  </div>
+      <div class="flex flex-col gap-2 mt-5">
+        <%= f.label :email, class: "text-sm font-medium text-gray-700" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "name@example.com", class: "w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 text-sm text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none" %>
+      </div>
 
-  <div class="field">
-    <p><%= f.label :password %></p>
-    <% if @minimum_password_length %>
-      <p><em>(<%= @minimum_password_length %> characters minimum)</em></p>
+      <div class="flex flex-col gap-2 mt-5">
+        <%= f.label :password, class: "text-sm font-medium text-gray-700" %>
+        <% if @minimum_password_length %>
+          <em class="text-sm font-medium text-gray-700">(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "enter password", class: "w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 text-sm text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none" %>
+      </div>
+
+      <div class="flex flex-col gap-2 mt-5 mb-6">
+        <%= f.label :password_confirmation, class: "text-sm font-medium text-gray-700" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "confirm password", class: "w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 text-sm text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Sign up", class: "w-full cursor-pointer rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition duration-200" %>
+      </div>
     <% end %>
-    <p><%= f.password_field :password, autocomplete: "new-password" %></p>
-  </div>
 
-  <div class="field">
-    <p><%= f.label :password_confirmation %></p>
-    <p><%= f.password_field :password_confirmation, autocomplete: "new-password" %></p>
+    <div class="mt-6 border-t border-gray-200 pt-6 text-center text-sm">
+      <%= render "admin_users/shared/links" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "admin_users/shared/links" %>
+</div>
