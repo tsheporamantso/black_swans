@@ -1,7 +1,7 @@
 <div class="max-w-6xl mx-auto">
   <%# -- Search -- %>
   <%= search_form_for @q do |f| %>
-    <div class="flex gap-2 ">
+    <div class="flex gap-2">
       <%=
         f.search_field :first_name_or_last_name_or_email_cont,
         placeholder: "Search students...",

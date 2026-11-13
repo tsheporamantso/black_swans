@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy personal_details ]
+  before_action :authenticate_admin_user!
 
   def index
     per_page = 2
