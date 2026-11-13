@@ -18,7 +18,7 @@ class CoursesController < ApplicationController
 
     offset = (@page - 1) * per_page
 
-    @courses = Course.all.order(:id).limit(per_page).offset(offset)
+    @courses = Course.includes(:students).order(:id).limit(per_page).offset(offset)
   end
 
   # GET /courses/1 or /courses/1.json
