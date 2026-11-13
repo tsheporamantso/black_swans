@@ -1,4 +1,20 @@
 <div class="max-w-6xl mx-auto">
+  <%# -- Search -- %>
+  <%= search_form_for @q do |f| %>
+    <div class="flex gap-2">
+      <%=
+        f.search_field :name_cont,
+        placeholder: "Search courses...",
+        class: "rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition p-2"
+      %>
+
+      <%=
+        f.submit "Search",
+        class: "bg-blue-600 text-white px-4 py-2 rounded-lg"
+      %>
+    </div>
+  <% end %>
+
   <!-- Pagination -->
   <div class="mb-20">
     <%= render "pagination" %>

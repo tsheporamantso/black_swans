@@ -9,16 +9,22 @@ class CoursesController < ApplicationController
 
     per_page = 2
 
-    @page = [params[:page].to_i, 1].max
+    @q = Course.ransack(params[:q])
 
-    @total_courses = Course.count
+    courses = @q.result(distinct: true)
+
+    @total_courses = courses.count
     @total_pages = [(@total_courses.to_f / per_page).ceil, 1].max
 
-    @page = [@page, @total_pages].min
+    @page = [[params[:page].to_i, 1].max, @total_pages].min
 
     offset = (@page - 1) * per_page
 
-    @courses = Course.includes(:students).order(:id).limit(per_page).offset(offset)
+    @courses = courses
+                .includes(:students)
+                .order(:id)
+                .limit(per_page)
+                .offset(offset)
   end
 
   # GET /courses/1 or /courses/1.json
