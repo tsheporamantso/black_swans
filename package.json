@@ -1,6 +1,12 @@
 {
   "devDependencies": {
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "husky": "^9.1.7",
     "prettier": "^2.2.1",
     "prettier-plugin-erb": "^0.4.0"
+  },
+  "scripts": {
+    "prepare": "husky"
   }
 }
