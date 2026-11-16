@@ -74,3 +74,5 @@ gem 'kaminari'
 gem "pagy"
 
 gem "ransack"
+
+gem "rspec-rails"
