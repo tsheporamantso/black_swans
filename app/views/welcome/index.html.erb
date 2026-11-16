@@ -1,15 +1,15 @@
 <!-- Jumbotron -->
-<div
-  class="rounded-lg bg-white p-6 text-surface shadow-lg dark:bg-neutral-700 dark:text-white dark:shadow-black/30">
-  <h2 class="mb-5 text-3xl font-semibold capitalize">Student Management</h2> 
-  <p>
-  Record management application that tracks students details, courses enrolled and projects assigned. 
-  </p>
+<div class="rounded-lg bg-white p-6 text-surface shadow-lg dark:bg-neutral-700 dark:text-white dark:shadow-black/30">
+  <h2 class="mb-5 text-3xl font-semibold capitalize">Student Management</h2>
+  <p>Record management application that tracks students details, courses enrolled and projects assigned.</p>
   <hr class="my-6 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
   <p class="mb-4">
-  Black Swans University(BSU) is a prestigious institution that produces top tier students in mastering software development.
+    Black Swans University(BSU) is a prestigious institution that produces top tier students in mastering software
+    development.
   </p>
-  <%= link_to "Students", students_path,class:"w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-500 hover:bg-blue-700 inline-block font-medium" %>
-
+  <div class="flex gap-4">
+    <%= link_to "Students", students_path,class:"w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-500 hover:bg-blue-700 inline-block font-medium" %>
+    <%= link_to "Sign in", new_admin_user_session_path, class: "w-auto rounded-md text-white bg-blue-500 hover:bg-blue-700 font-medium py-2.5 px-3.5" %>
+  </div>
 </div>
 <!-- Jumbotron -->
