@@ -2,8 +2,8 @@
 
 one:
   student: one
-  courses: one
+  course: one
 
 two:
   student: two
-  courses: two
+  course: two
