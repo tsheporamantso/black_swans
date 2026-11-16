@@ -13,8 +13,11 @@ class StudentTest < ActiveSupport::TestCase
     assert_student_invalid(student)
   end
 
-  test "should not create student with minimum length of 2 on first_name and last_name" do
-    student = Student.new(first_name: "A", last_name: "B")
+  test "should be invalid with incorrect length" do
+    first_name = "a"
+    last_name = "a" * 51
+
+    student = Student.new(first_name: first_name, last_name: last_name)
     
     assert_student_invalid(student)
   end
@@ -38,5 +41,18 @@ class StudentTest < ActiveSupport::TestCase
     ) 
   
     assert student.save
+  end
+
+  test "should have many enrollments" do
+    association = Student.reflect_on_association(:enrollments)
+
+    assert_equal :has_many, association.macro
+  end
+
+  test "should have many courses through enrollments" do
+    association = Student.reflect_on_association(:courses)
+
+    assert_equal :has_many, association.macro
+    assert_equal :enrollments, association.options[:through]
   end
 end
