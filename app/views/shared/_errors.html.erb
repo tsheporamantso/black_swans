@@ -3,7 +3,7 @@
     <h4 class="mb-5">
       The following <%= pluralize(@student.errors.count, "error") %> prevented the
       <%= @student.class.name.downcase %>
-      from being saved
+      from being saved.
     </h4>
     <ul class="list-disc ml-6 mb-5">
       <% @student.errors.full_messages.each do |message| %>
