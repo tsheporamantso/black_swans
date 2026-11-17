@@ -2,6 +2,39 @@
 require "rails_helper"
 
 RSpec.describe Student, type: :model do
+
+  describe "student" do
+    it "should not create student with empty attributes" do
+      student = Student.create()
+
+      expect(student.persisted?).to be false
+    end
+    
+    it "should be invalid with incorrect email format" do
+      student = build(:student, email: "johndoe.com")
+
+      expect(student).not_to be_valid
+      expect(student.errors[:email]).to include("is invalid")
+    end
+
+    it "should be invalid with incorrect name format" do
+      student = build(:student, first_name: "Tshepo 2")
+
+      expect(student).not_to be_valid
+      expect(student.errors[:first_name]).to include("can only contain letters, spaces, hyphens, and apostrophes")
+    end
+
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:email) }
+    it { should validate_uniqueness_of(:email) }
+    it { should validate_length_of(:first_name).is_at_least(2) }
+    it { should validate_length_of(:first_name).is_at_most(50) }
+    it { should validate_length_of(:last_name).is_at_least(2) }
+    it { should allow_value("Tshepo").for(:first_name) }
+    it { should_not allow_value("John@Doe").for(:last_name) }
+    
+  end
   describe "associations" do
     it { should have_many(:enrollments).dependent(:destroy) }
 
