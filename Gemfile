@@ -76,3 +76,5 @@ gem "pagy"
 gem "ransack"
 
 gem "rspec-rails"
+gem "factory_bot_rails", "~> 6.5"
+gem "shoulda-matchers", "~> 8.0"
