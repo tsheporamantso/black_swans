@@ -55,8 +55,7 @@ class Student < ApplicationRecord
 
   def display_student_age
     if date_of_birth.present?
-      age = ((Time.zone.now - date_of_birth.to_time) / 1.year.seconds).floor
-      Rails.logger.info("Student age is #{age} years")
+      Rails.logger.info("Student age is #{student_age} years")
     else
       Rails.logger.warn("Date of birth not provided, cannot calculate age.")
     end

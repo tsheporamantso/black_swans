@@ -37,7 +37,6 @@ RSpec.describe Student, type: :model do
   end
   describe "associations" do
     it { should have_many(:enrollments).dependent(:destroy) }
-
     it { should have_many(:courses).through(:enrollments) }
 
     it { should have_many(:student_projects).dependent(:destroy) }
@@ -71,6 +70,43 @@ RSpec.describe Student, type: :model do
       expect {
         student.destroy
       }.to change(Enrollment, :count).by(-1)
+    end
+  end
+
+  describe "callbacks" do
+    describe "before_validation" do
+
+      it "should titlelize first_name before validation" do
+        student = build(:student, first_name: "tshepo")
+        
+        student.valid?
+        expect(student.first_name).to eq("Tshepo")
+      end
+
+      it "should log errors after validation" do
+        student = build(:student, email: "") 
+
+        expect(Rails.logger).to receive(:error).with(/Validation failed:/).at_least(:once)
+        
+        student.valid?
+
+        expect(student).not_to allow_value(nil).for(:email)
+      end
+      
+      it "should display student age after create" do
+        expect(Rails.logger).to receive(:info).with(/Name titleized to Tshepo/).and_call_original
+
+        expect(Rails.logger).to receive(:info).with(/Student age is 42 years/).and_call_original
+
+      FactoryBot.create(:student, date_of_birth: "1983-12-19")
+      end  
+
+      it "should log a warning when date of birth is missing" do
+        
+        expect(Rails.logger).to receive(:warn).with("Date of birth not provided, cannot calculate age.")
+
+        create(:student)
+      end
     end
   end
 end
