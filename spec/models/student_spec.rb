@@ -75,14 +75,14 @@ RSpec.describe Student, type: :model do
 
   describe "callbacks" do
     describe "before_validation" do
-
       it "should titlelize first_name before validation" do
         student = build(:student, first_name: "tshepo")
         
         student.valid?
         expect(student.first_name).to eq("Tshepo")
       end
-
+    end
+    describe "after_validation" do
       it "should log errors after validation" do
         student = build(:student, email: "") 
 
@@ -92,7 +92,8 @@ RSpec.describe Student, type: :model do
 
         expect(student).not_to allow_value(nil).for(:email)
       end
-      
+    end
+    describe "after_create" do 
       it "should display student age after create" do
         expect(Rails.logger).to receive(:info).with(/Name titleized to Tshepo/).and_call_original
 
