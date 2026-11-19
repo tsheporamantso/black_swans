@@ -35,7 +35,7 @@ RSpec.describe Student, type: :model do
     it { should_not allow_value("John@Doe").for(:last_name) }
     
   end
-  describe "associations" do
+ context "associations" do
     it { should have_many(:enrollments).dependent(:destroy) }
     it { should have_many(:courses).through(:enrollments) }
 
@@ -44,7 +44,7 @@ RSpec.describe Student, type: :model do
     it { should have_many(:projects).through(:student_projects) }
   end
 
-  describe "enrollment associations" do
+ context "enrollment associations" do
     let(:student) { create(:student) }
     let(:course) { create(:course) }
 
@@ -74,7 +74,7 @@ RSpec.describe Student, type: :model do
   end
 
   describe "callbacks" do
-    describe "before_validation" do
+   context "before_validation" do
       it "should titlelize first_name before validation" do
         student = build(:student, first_name: "tshepo")
         
@@ -82,7 +82,7 @@ RSpec.describe Student, type: :model do
         expect(student.first_name).to eq("Tshepo")
       end
     end
-    describe "after_validation" do
+   context "after_validation" do
       it "should log errors after validation" do
         student = build(:student, email: "") 
 
@@ -93,7 +93,7 @@ RSpec.describe Student, type: :model do
         expect(student).not_to allow_value(nil).for(:email)
       end
     end
-    describe "after_create" do 
+    context "after_create" do 
       it "should display student age after create" do
         expect(Rails.logger).to receive(:info).with(/Name titleized to Tshepo/).and_call_original
 
@@ -109,5 +109,29 @@ RSpec.describe Student, type: :model do
         create(:student)
       end
     end
+  end
+
+  describe "instance methods" do
+    context "#full name" do
+      it "should display student first name and last name" do
+      student = create(:student)
+
+      expect(student.full_name).to eq("Tshepo Ramantso")
+      
+      end
+    end
+    context "#student age" do
+      it "should return student age" do
+        student = create(:student, date_of_birth: "1983-12-19")
+
+        expect(student.student_age).to eq(42)
+      end
+
+     it "should return warning message if date of birth is not provided" do
+       student = create(:student)
+
+       expect(student.student_age).to eq("Date of Birth not provided")
+     end 
+    end    
   end
 end
