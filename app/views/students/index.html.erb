@@ -37,7 +37,8 @@
   <div id="students" class="space-y-5">
     <% if @students.any? %>
       <% @students.each do |student| %>
-        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 hover:shadow-lg transition">
+      
+        <div id="<%= dom_id(student) %>" class="bg-white rounded-xl shadow-md border border-gray-200 p-6 hover:shadow-lg transition">
           <!-- Student heading -->
           <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6">
             <div>
