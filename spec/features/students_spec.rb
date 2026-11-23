@@ -106,6 +106,35 @@ RSpec.describe "Student management workflow", type: :feature do
     end 
   end
 
+  it "should update student record" do 
+    student = create(:student)
+
+    visit edit_student_path(student)
+
+    student.update(first_name: "Tshepo Gladwin")
+    click_button "Update Student"
+
+    expect(page).to have_current_path(student_path(student))
+    expect(page).to have_content("Student updated successfully.")
+  end
+
+  it "should render validation message when record is updated with empty field" do
+    student = create(:student)
+
+    visit edit_student_path(student)
+
+    student.update(first_name: "")
+
+    click_button "Update Student"
+    
+    expect(page).to have_current_path(edit_student_path(student))
+#    expect(page).to have_content("First name can't be blank")
+ #   expect(page).to have_content("First name is too short (minimum is 2 characters)")
+  #  expect(page).to have_content("First name can only contain letters, spaces, hyphens and apostrophes")
+  end
+
+
+
   it "should navigate to the student view/show page" do
     student = create(:student)
 
