@@ -85,6 +85,7 @@ RSpec.describe "Students", type: :request do
           email: "invalid email"
         }
       }
+      student.reload
       expect(student.email).to eq("tshepo2@example.com")
       expect(response).to render_template(:edit)
       expect(response).to have_http_status(:unprocessable_content)
