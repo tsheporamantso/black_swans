@@ -33,7 +33,7 @@ class StudentsController < ApplicationController
       flash[:notice] = "Student created successfully."
       redirect_to students_path
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -49,7 +49,7 @@ class StudentsController < ApplicationController
       flash[:notice] = "Student updated successfully."
       redirect_to student_path(@student)
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
