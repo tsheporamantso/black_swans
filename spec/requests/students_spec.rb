@@ -56,7 +56,7 @@ RSpec.describe "Students", type: :request do
           }
         }
       }.not_to change(Student, :count)
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(response).to render_template(:new)
     end
   end
@@ -75,6 +75,32 @@ RSpec.describe "Students", type: :request do
       expect(student.first_name).to eq("Gladwin")
       expect(response).to redirect_to(student_path(student))
       expect(flash[:notice]).to eq("Student updated successfully.")
+    end
+
+    it "does not update student and returns 422 HTTP status" do
+      student = create(:student)
+
+      patch student_path(student), params: {
+        student: {
+          email: "invalid email"
+        }
+      }
+      expect(student.email).to eq("tshepo2@example.com")
+      expect(response).to render_template(:edit)
+      expect(response).to have_http_status(:unprocessable_content)
+    end
+  end
+
+  describe "DELETE /students" do
+    it "should delete student record" do
+      student = create(:student)
+      
+      expect {
+        delete student_path(student)
+      }.to change(Student, :count).by(-1)
+
+      expect(response).to redirect_to(students_path)
+      expect(flash[:notice]).to eq("Student deleted successfully.")
     end
   end
 end
