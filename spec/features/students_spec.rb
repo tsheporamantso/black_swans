@@ -123,17 +123,12 @@ RSpec.describe "Student management workflow", type: :feature do
 
     visit edit_student_path(student)
 
-    student.update(first_name: "")
+    fill_in "First name", with: "A"
 
     click_button "Update Student"
     
-    expect(page).to have_current_path(edit_student_path(student))
-#    expect(page).to have_content("First name can't be blank")
- #   expect(page).to have_content("First name is too short (minimum is 2 characters)")
-  #  expect(page).to have_content("First name can only contain letters, spaces, hyphens and apostrophes")
+    expect(page).to have_content("First name is too short (minimum is 2 characters)")
   end
-
-
 
   it "should navigate to the student view/show page" do
     student = create(:student)
@@ -147,17 +142,15 @@ RSpec.describe "Student management workflow", type: :feature do
     expect(page).to have_current_path(student_path(student))
   end
 
-#  it "should delete a student" do
- #   student = create(:student)
+  it "should delete a student" do
+   student = create(:student)
 
-  #  visit students_path(page: 2)
-
-   # within("#student_#{student.id}") do
-    #  accept_confirm do
-       # click_button "Delete Student"
-     # end
-   # end
-    #expect(page).to have_content("Student deleted successfully")
-    #expect(Student.exists?(student.id)).to be (false)
- # end
+    visit students_path
+    
+    click_button "Delete Student"
+    
+    expect(page).to have_content("Student deleted successfully")
+    expect(page).to have_current_path(students_path)
+    expect(Student.exists?(student.id)).to be (false)
+  end
 end
