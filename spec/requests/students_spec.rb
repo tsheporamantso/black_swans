@@ -79,6 +79,7 @@ RSpec.describe "Students", type: :request do
 
     it "does not update student and returns 422 HTTP status" do
       student = create(:student)
+      original_email = student.email
 
       patch student_path(student), params: {
         student: {
@@ -86,7 +87,7 @@ RSpec.describe "Students", type: :request do
         }
       }
       student.reload
-      expect(student.email).to eq("tshepo2@example.com")
+      expect(student.email).to eq(original_email)
       expect(response).to render_template(:edit)
       expect(response).to have_http_status(:unprocessable_content)
     end
