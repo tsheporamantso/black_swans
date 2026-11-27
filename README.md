@@ -228,7 +228,11 @@ The following are potential improvements, not claims about completed functionali
 
 ## Author
 
-No author or maintainer information was found in the repository documentation. Add attribution here when provided by the project owner.
+👤 **Gladwin Tshepo Ramantso**
+
+- GitHub: [@tsheporamantso](https://github.com/tsheporamantso)
+- Twitter: [@ramgt001](https://twitter.com/ramgt001)
+- LinkedIn: [Tshepo Gladwin Ramantso](https://www.linkedin.com/in/tshepo-ramantso-b6a35433/)
 
 ## License
 
